@@ -5,7 +5,7 @@ import com.ecom.notification.payload.OrderStatus;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+
 
 @Service
 public class OrderEventConsumer {
