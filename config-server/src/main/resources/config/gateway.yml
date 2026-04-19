@@ -1,0 +1,73 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+# Circuit Breaker configuration
+resilience4j:
+  circuitbreaker:
+    instances:
+      ecomBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slidingWindowType: count_based
+
+
+
+
+
+
+#spring:
+#  cloud:
+#    gateway:
+#      server:
+#        webflux:
+#          routes:
+#            - id: product
+#              uri: lb://PRODUCT
+#              predicates:
+#                - Path=/products/**
+#              filters:
+#                - RewritePath=/products(?<segment>/?.*),/api/products${segment}
+#
+#            - id: order
+#              uri: lb://ORDER
+#              predicates:
+#                - Path=/orders/**, /cart/**
+#              filters:
+#                - RewritePath=/(?<segment>/?.*),/api/${segment}
+#
+#            - id: user
+#              uri: lb://USER
+#              predicates:
+#                - Path=/user/**
+#              filters:
+#                - RewritePath=/user(?<segment>/?.*),/api/user${segment}
+#
+#            - id: eureka
+#              uri: lb://localhost:8761
+#              predicates:
+#                - Path=/eureka/main
+#
+#            - id: eureka-server-static
+#              uri: http://localhost:8761
+#              predicates:
+#                  - Path=/eureka/**
