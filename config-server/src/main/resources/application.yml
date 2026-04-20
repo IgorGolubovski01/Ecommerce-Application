@@ -8,6 +8,16 @@ spring:
       server:
         native:
           search-locations: classpath:/config
-
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    connection-timeout: 30000
+    virtual-host: ${RABBITMQ_VHOST:/}
+    ssl:
+      enabled: ${RABBITMQ_SSL_ENABLED:true}
+      validate-server-certificate: false
+      verify-hostname: false
 server:
   port: 8888

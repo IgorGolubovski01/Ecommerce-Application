@@ -3,6 +3,18 @@ spring:
     uri: ${MONGO_URI}
     database: userdb
 
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    connection-timeout: 30000
+    virtual-host: ${RABBITMQ_VHOST:/}
+    ssl:
+      enabled: ${RABBITMQ_SSL_ENABLED:true}
+      validate-server-certificate: false
+      verify-hostname: false
+
 server:
   port: 8082
 
@@ -28,3 +40,4 @@ eureka:
 #    port: 5672
 #    username: guest
 #    password: guest
+
